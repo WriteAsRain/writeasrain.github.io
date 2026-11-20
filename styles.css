@@ -504,6 +504,46 @@ section { padding: 96px 0; }
    introduces the grid directly, it carries the whole gap itself. */
 .services-intro + .niche-grid { margin-top: 44px; }
 
+/* Client testimonials. The markup is written by scripts/build-testimonials.py
+   between marker comments, so change the words there, not in the page. */
+.testimonial {
+  max-width: 640px;
+  margin: 48px auto 0;
+  padding: 26px 0 0;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+}
+.testimonial:last-child { margin-bottom: 0; }
+/* After a worked example, which already brings 48px of its own. */
+.services-order + .testimonial { margin-top: 0; }
+.testimonial blockquote { margin: 0; }
+.testimonial blockquote p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.testimonial blockquote p:first-child::before { content: '\201C'; }
+.testimonial blockquote p:last-child::after { content: '\201D'; }
+.testimonial blockquote p + p { margin-top: 12px; }
+.testimonial figcaption {
+  margin-top: 16px;
+  font-size: 13.5px;
+  color: var(--ink-faint);
+}
+.testimonial-name {
+  display: block;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.testimonial-role a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.testimonial-role a:hover { color: var(--accent); }
+@media (max-width: 600px) {
+  .testimonial blockquote p { font-size: 17px; }
+}
+
 .service-group { max-width: 840px; margin: 0 auto 52px; }
 .service-group:last-of-type { margin-bottom: 0; }
 
