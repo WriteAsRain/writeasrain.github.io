@@ -508,19 +508,76 @@ section { padding: 96px 0; }
 
 /* Client testimonials. The markup is written by scripts/build-testimonials.py
    between marker comments, so change the words there, not in the page. */
+.testimonials {
+  max-width: 740px;
+  margin: 48px auto 0;
+}
+/* After a worked example, which already brings 48px of its own. */
+.services-order + .testimonials { margin-top: 0; }
+
+/* Two or more quotes: a scroll-snap strip, one panel wide. It swipes on a
+   phone and scrolls without scripting; site.js adds the dots' behaviour. */
+.testimonial-track {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.testimonial-track::-webkit-scrollbar { display: none; }
+.testimonial-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.testimonial-slide {
+  flex: 0 0 100%;
+  display: flex;
+  scroll-snap-align: start;
+}
+.testimonial-slide > .testimonial { flex: 1; }
+
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+.testimonial-dot {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.testimonial-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+  box-shadow: inset 0 0 0 1px var(--ink-faint);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+/* The dots do nothing without site.js, so they only appear with it. */
+html:not(.js) .testimonial-dots { display: none; }
+.testimonial-dot:hover::before { background: var(--ink-faint); }
+.testimonial-dot[aria-current="true"]::before {
+  background: var(--accent);
+  box-shadow: none;
+  transform: scale(1.25);
+}
+.testimonial-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 50%; }
+
 /* Its own tinted panel, distinct from both section backgrounds, so it reads
    as a quote from somebody else rather than more of my copy. */
 .testimonial {
-  max-width: 740px;
-  margin: 48px auto 0;
+  margin: 0;
   padding: 28px 32px 26px;
   background: var(--quote-bg);
   border-left: 3px solid var(--accent);
   border-radius: 2px;
 }
-.testimonial:last-child { margin-bottom: 0; }
-/* After a worked example, which already brings 48px of its own. */
-.services-order + .testimonial { margin-top: 0; }
 .testimonial blockquote { margin: 0; }
 .testimonial blockquote p {
   font-size: 17px;

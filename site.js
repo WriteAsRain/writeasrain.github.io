@@ -556,4 +556,40 @@
     if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
   }, { passive: true });
   onScroll();
+
+  // --- Testimonial carousels ---
+  // Markup comes from scripts/build-testimonials.py. The track is a native
+  // scroll-snap strip, so swiping and keyboard scrolling already work; this
+  // only makes the dots move it and keeps the current dot in step with it.
+  // No autoplay: a quote that slides away mid-sentence is worse than none.
+  document.querySelectorAll('.testimonial-track').forEach(function (track) {
+    var slides = track.querySelectorAll('.testimonial-slide');
+    var dots = track.parentNode.querySelectorAll('.testimonial-dot');
+    if (slides.length < 2 || dots.length !== slides.length) return;
+    var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function current() {
+      return Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+    }
+    function mark(i) {
+      dots.forEach(function (d, j) {
+        if (j === i) d.setAttribute('aria-current', 'true');
+        else d.removeAttribute('aria-current');
+      });
+    }
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () {
+        track.scrollTo({ left: i * track.clientWidth, behavior: smooth ? 'smooth' : 'auto' });
+        mark(i);
+      });
+    });
+
+    var pending = false;
+    track.addEventListener('scroll', function () {
+      if (pending) return;
+      pending = true;
+      window.requestAnimationFrame(function () { mark(current()); pending = false; });
+    }, { passive: true });
+  });
 })();
