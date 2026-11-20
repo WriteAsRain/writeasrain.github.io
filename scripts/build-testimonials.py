@@ -53,7 +53,8 @@ TESTIMONIALS = {
         link="https://www.demarkupublishing.com/",
     ),
     "demarku-dialogue": dict(
-        quote="I've received feedback on the same chapter from several "
+        quote="I wanted to tell you how much I value your editorial "
+              "judgement. I've received feedback on the same chapter from several "
               "editors, and yours has been the most useful. Others asked for "
               "more dialogue tags in general terms; you pointed to the exact "
               "places where a reader loses track of who is speaking.",
