@@ -13,6 +13,7 @@
   --accent-soft: rgba(109, 31, 42, 0.12);
   --rule: #e0d4c0;
   --shadow-soft: 0 10px 30px rgba(43, 33, 24, 0.08);
+  --quote-bg: #f3e4df;
 }
 
 /* Dark tones stay brown, but held around hue 28° at roughly half the
@@ -27,6 +28,7 @@
   --accent-soft: rgba(224, 141, 146, 0.16);
   --rule: #372f28;
   --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --quote-bg: #2c2120;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -506,22 +508,23 @@ section { padding: 96px 0; }
 
 /* Client testimonials. The markup is written by scripts/build-testimonials.py
    between marker comments, so change the words there, not in the page. */
+/* Its own tinted panel, distinct from both section backgrounds, so it reads
+   as a quote from somebody else rather than more of my copy. */
 .testimonial {
-  max-width: 640px;
+  max-width: 740px;
   margin: 48px auto 0;
-  padding: 26px 0 0;
-  border-top: 1px solid var(--rule);
-  text-align: center;
+  padding: 28px 32px 26px;
+  background: var(--quote-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
 }
 .testimonial:last-child { margin-bottom: 0; }
 /* After a worked example, which already brings 48px of its own. */
 .services-order + .testimonial { margin-top: 0; }
 .testimonial blockquote { margin: 0; }
 .testimonial blockquote p {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-size: 19px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.75;
   color: var(--ink);
 }
 .testimonial blockquote p:first-child::before { content: '\201C'; }
@@ -541,7 +544,8 @@ section { padding: 96px 0; }
 .testimonial-role a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .testimonial-role a:hover { color: var(--accent); }
 @media (max-width: 600px) {
-  .testimonial blockquote p { font-size: 17px; }
+  .testimonial { padding: 22px 20px 20px; }
+  .testimonial blockquote p { font-size: 16px; }
 }
 
 .service-group { max-width: 840px; margin: 0 auto 52px; }
